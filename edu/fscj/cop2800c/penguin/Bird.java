@@ -15,8 +15,13 @@ public class Bird implements Comparable<Bird> {
     private String sex;
 
     // Constructor
-    public Bird(int sampleNum, double culmenLength, 
-                double culmenDepth, double bodyMass, String sex) {
+    public Bird(int sampleNum, double culmenLength,
+                double culmenDepth, double bodyMass, String sex)
+            throws InvalidBirdDataException {
+        if (sampleNum < 0 || culmenLength < 0 || culmenDepth < 0
+                || bodyMass < 0 || sex == null || sex.isEmpty()) {
+            throw new InvalidBirdDataException("Invalid Bird data encountered.");
+        }
         this.sampleNum = sampleNum;
         this.culmenLength = culmenLength;
         this.culmenDepth = culmenDepth;
@@ -48,7 +53,7 @@ public class Bird implements Comparable<Bird> {
     // base class toString (override)
     @Override
     public String toString() {
-        String retStr = 
+        String retStr =
            "sampleNum=" + sampleNum +
            ", culmenLength=" + culmenLength +
            ", culmenDepth=" + culmenDepth +
@@ -56,7 +61,7 @@ public class Bird implements Comparable<Bird> {
            ", sex='" + sex;
         return retStr;
     }
-    
+
     // base class compareTo (override)
     @Override
     public int compareTo(Bird other) {
